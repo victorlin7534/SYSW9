@@ -5,4 +5,4 @@ file.o: file.c
 run:
 	./test
 clean:
-	rm -f *~ *.o *.exe *.out 
+	rm -f *~ *.o *.exe *.out test file.txt
