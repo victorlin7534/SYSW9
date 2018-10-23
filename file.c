@@ -4,7 +4,7 @@
 #include <fcntl.h>
 
 int main(){
-  int file = open("file.txt",O_CREAT,O_RDWR);
+  int file = open("file.txt",O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
   printf("int value returned by open(): %d\n",file);
 
   char * sentence = "Whoever reads this likes potatoes and hot chocolate";
@@ -13,11 +13,12 @@ int main(){
   char data[200];
   read(file,data,200);
 
-  char * temp = data;
-  while(*temp){
-    printf("%c",*temp);
-    temp++;
+  int i = 0;
+  while(i<200){
+    printf("%c",data[i]);
+    i++;
   }
+  printf("\n");
 
   file = close(file);
   printf("int value returned by close(): %d\n",file);
