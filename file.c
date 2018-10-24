@@ -5,7 +5,7 @@
 #include <string.h>
 
 int main(){
-  int file = open("file.txt", O_CREAT | O_RDWR);
+  int file = open("file.txt", O_CREAT | O_RDWR, S_IWUSR);
   printf("int value returned by open(): %d\n",file);
 
   char * sentence = "Whoever reads this likes potatoes and hot chocolate";
@@ -14,14 +14,14 @@ int main(){
 
   close(file);
    
-  int f2 = open("file.txt",O_RDONLY);
-  char *buffer = calloc(1,100);
-  size = read(file,buffer,51);
+  file = open("file.txt",O_RDONLY);
+  char *buffer = calloc(100,1);
+  size = read(file,buffer,size);
   printf("int value returned by read(): %d\n",size);
     
   printf("file contents: %s\n", buffer); 
     
-  f2 = close(f2);
+  file = close(file);
   printf("int value returned by close f2(): %d\n",file);
 
   return 0;
