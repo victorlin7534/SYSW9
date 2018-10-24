@@ -5,21 +5,24 @@
 #include <string.h>
 
 int main(){
-  int file = open("file.txt",O_CREAT | O_RDWR, S_IRWXG | S_IRWXO | S_IRWXU);
+  int file = open("file.txt", O_CREAT | O_RDWR);
   printf("int value returned by open(): %d\n",file);
 
   char * sentence = "Whoever reads this likes potatoes and hot chocolate";
   int size = write(file,sentence,strlen(sentence));
   printf("int value returned by write(): %d\n",size);
 
-  char data[size];
-  size = read(file,data,size);
-  data[size] = '\0';
+  close(file);
+   
+  int f2 = open("file.txt",O_RDONLY);
+  char *buffer = calloc(1,100);
+  size = read(file,buffer,51);
   printf("int value returned by read(): %d\n",size);
-  printf("string read: %s\n",data);
-  
-  file = close(file);
-  printf("int value returned by close(): %d\n",file);
+    
+  printf("file contents: %s\n", buffer); 
+    
+  f2 = close(f2);
+  printf("int value returned by close f2(): %d\n",file);
 
   return 0;
 }
